@@ -1,0 +1,19 @@
+{
+  "name": "blog",
+  "version": "0.0.0",
+  "homepage": "https://github.com/dustinleblanc/blog",
+  "authors": [
+    "Dustin LeBlanc <dustin@singlebrook.com>"
+  ],
+  "description": "My blog",
+  "main": "public/index.php",
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
