@@ -7,15 +7,16 @@ use Illuminate\Database\Eloquent\Model;
  * Class Post
  * @package App
  */
-class Post extends Model {
+class Post extends Model
+{
 
     /**
      * @var array
      */
     protected $fillable = [
-        'title',
-        'content',
-        'published_at'
+      'title',
+      'content',
+      'published_at'
     ];
 
     /**
