@@ -12,6 +12,10 @@ use Auth;
 class PostController extends Controller
 {
 
+    /**
+     * Constructs new post object.
+     * Ensures only authorized users may create, edit, or delete.
+     */
     public function __construct()
     {
         $this->middleware('auth', ['except' => ['index', 'show']]);
@@ -43,12 +47,13 @@ class PostController extends Controller
     /**
      * Store a newly created resource in storage.
      *
+     * @param PostRequest $request
+     *
      * @return Response
      */
     public function store(PostRequest $request)
     {
         $post = new Post($request->all());
-
         Auth::user()->posts()->save($post);
 
         return redirect('posts');
@@ -57,39 +62,37 @@ class PostController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int $id
-     * @return Response
+     * @param \App\Post $post
+     *
+     * @return \App\Http\Controllers\Response
+     * @internal param int $id
      */
-    public function show($id)
+    public function show(Post $post)
     {
-        $post = Post::findOrFail($id);
-
-        return view('posts.show', $post);
+        return view('posts.show', compact('post'));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int $id
-     * @return Response
+     * @param \App\Post $post
+     *
+     * @return \App\Http\Controllers\Response
+     * @internal param int $id
      */
-    public function edit($id)
+    public function edit(Post $post)
     {
-        $post = Post::findOrFail($id);
-
         return view('posts.edit', compact('post'));
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  int $id
-     * @return Response
+     * @param  Post $post
+     * @return \App\Http\Controllers\Response
      */
-    public function update($id, PostRequest $request)
+    public function update(Post $post, PostRequest $request)
     {
-        $post = Post::findOrFail($id);
-
         $post->update($request->all());
 
         return redirect('posts');
@@ -98,12 +101,16 @@ class PostController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int $id
-     * @return Response
+     * @param \App\Post $post
+     *
+     * @return \App\Http\Controllers\Response
+     * @internal param int $id
      */
-    public function destroy($id)
+    public function destroy(Post $post)
     {
-        $post = Post::findOrFail($id);
+        $post->destroy();
+
+        return redirect('posts');
     }
 
 }
