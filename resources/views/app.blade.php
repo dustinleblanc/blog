@@ -19,27 +19,7 @@
 	<![endif]-->
 </head>
 <body>
-	<nav class="navbar">
-		<div class="container">
-			<div class="navbar-header">
-				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#main-nav">
-					<span class="sr-only">Toggle Navigation</span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-				</button>
-				<a class="navbar-brand" href="#">Happy Hackr</a>
-			</div>
-
-			<div class="collapse navbar-collapse" id="main-nav">
-				<ul class="nav navbar-nav navbar-right">
-					<li><a href="{{ url('/') }}">Home</a></li>
-                    <li><a href="{{ url('about') }}">About</a></li>
-                    <li><button type="button" class="btn btn-primary navbar-btn">Sign Up for Updates</button></li>
-				</ul>
-			</div>
-		</div>
-	</nav>
+	@include('partials._navbar')
     <section class="row-fluid">
         <div class="container-fluid">
             @yield('banner')
@@ -47,8 +27,10 @@
     </section>
     <section class="row">
         <div class="container">
+            @include('flash::message')
             @yield('content')
         </div>
     </section>
+    @include('partials._footer')
 </body>
 </html>

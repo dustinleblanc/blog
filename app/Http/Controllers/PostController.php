@@ -3,6 +3,7 @@
 use App\Http\Requests;
 use App\Http\Requests\PostRequest;
 use App\Post;
+use App\Tag;
 use Auth;
 
 /**
@@ -41,7 +42,8 @@ class PostController extends Controller
      */
     public function create()
     {
-        return view('posts.create');
+        $tags = Tag::lists('name', 'id');
+        return view('posts.create', compact('tags'));
     }
 
     /**
@@ -53,10 +55,11 @@ class PostController extends Controller
      */
     public function store(PostRequest $request)
     {
-        $post = new Post($request->all());
-        Auth::user()->posts()->save($post);
+        $post = $this->createArticle($request);
 
-        return redirect('posts');
+        flash()->success('Your post has been created :)');
+
+        return redirect(action('PostController@show', $post->id));
     }
 
     /**
@@ -82,7 +85,8 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
-        return view('posts.edit', compact('post'));
+        $tags = Tag::lists('name', 'id');
+        return view('posts.edit', compact('post', 'tags'));
     }
 
     /**
@@ -95,7 +99,10 @@ class PostController extends Controller
     {
         $post->update($request->all());
 
-        return redirect('posts');
+        $this->syncTags($post, $request->input('tag_list'));
+
+        flash()->success("{$post->title} has been updated :)");
+        return redirect(action('PostController@show', $post->id));
     }
 
     /**
@@ -110,7 +117,31 @@ class PostController extends Controller
     {
         $post->destroy();
 
-        return redirect('posts');
+        return redirect(action('PostController@index'));
+    }
+
+    /**
+     * @param \App\Post $post
+     * @param array     $tags
+     *
+     */
+    private function syncTags(Post $post, array $tags)
+    {
+        $post->tags()->sync($tags);
+    }
+
+    /**
+     * @param \App\Http\Requests\PostRequest $request
+     *
+     * @return \App\Post $post
+     */
+    public function createArticle(PostRequest $request)
+    {
+        $post = Auth::user()->posts()->create($request->all());
+
+        $post->tags()->attach($request->input('tag_list'));
+
+        return $post;
     }
 
 }

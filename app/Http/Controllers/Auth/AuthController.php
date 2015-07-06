@@ -5,6 +5,11 @@ use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Contracts\Auth\Registrar;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
 
+/**
+ * Class AuthController
+ *
+ * @package App\Http\Controllers\Auth
+ */
 class AuthController extends Controller {
 
 	/*
@@ -35,4 +40,19 @@ class AuthController extends Controller {
 		$this->middleware('guest', ['except' => 'getLogout']);
 	}
 
+    /**
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
+    public function getRegister()
+    {
+        return redirect('auth/login');
+    }
+
+    /**
+     *
+     */
+    public function postRegister()
+    {
+
+    }
 }

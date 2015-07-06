@@ -13,6 +13,7 @@
 
 Route::get('/', 'HomeController@index');
 Route::resource('posts', 'PostController');
+Route::resource('tags', 'TagController');
 
 Route::controllers([
   'auth' => 'Auth\AuthController',

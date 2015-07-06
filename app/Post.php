@@ -55,4 +55,22 @@ class Post extends Model
     {
         return $this->belongsTo('App\User');
     }
+
+    /**
+     * Get Tags associated with Post
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function tags()
+    {
+        return $this->belongstoMany('App\Tag')->withTimestamps();
+    }
+
+    /**
+     * Get a list of tag ids associated with the current post.
+     * @return array
+     */
+    public function getTagListAttribute()
+    {
+        return $this->tags->lists('id');
+    }
 }
