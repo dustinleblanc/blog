@@ -1,7 +1,10 @@
 /vendor
 /node_modules
 .env
-
+/bower_components
+/public/build
+/public/css
+/public/js
 tests/_output/*
 tests/_output/*
 tests/_output/*

@@ -19,7 +19,7 @@ elixir(function(mix) {
         .sass("app.scss")
         .scripts([
             "app.js",
-            "../vendor/javascripts/",
+            "../vendor/jquery.js",
             "../vendor/javascripts/bootstrap.js"
         ], "public/js/app.js")
         .version(["css/app.css", "js/app.js"]);
