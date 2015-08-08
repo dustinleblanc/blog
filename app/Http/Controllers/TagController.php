@@ -1,15 +1,13 @@
 <?php namespace App\Http\Controllers;
 
-use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
 use App\Tag;
-use Illuminate\Http\Request;
 
 class TagController extends Controller {
 
     /**
-     * Constructs new post object.
+     * Constructs new tag object.
      * Ensures only authorized users may create, edit, or delete.
      */
     public function __construct()
