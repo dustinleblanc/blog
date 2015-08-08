@@ -7,7 +7,8 @@ use Illuminate\Database\Eloquent\Model;
  *
  * @package App
  */
-class Tag extends Model {
+class Tag extends Model
+{
 
     /**
      * @var array

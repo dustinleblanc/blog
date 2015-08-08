@@ -21,9 +21,9 @@ class PostRequest extends Request
     public function rules()
     {
         return [
-          'title' => 'required|min:3',
-          'content' => 'required',
-          'published_at' => 'required|date'
+            'title' => 'required|min:3',
+            'content' => 'required',
+            'published_at' => 'required|date'
         ];
     }
 

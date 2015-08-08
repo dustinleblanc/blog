@@ -122,7 +122,7 @@ class PostController extends Controller
 
     /**
      * @param \App\Post $post
-     * @param array     $tags
+     * @param array $tags
      *
      */
     private function syncTags(Post $post, array $tags)
