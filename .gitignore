@@ -5,6 +5,7 @@
 /public/build
 /public/css
 /public/js
+/.idea
 tests/_output/*
 tests/_output/*
 tests/_output/*
